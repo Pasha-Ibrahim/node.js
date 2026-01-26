@@ -4,38 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-    <link rel="stylesheet" href="./app2.css" />
+    <link rel="stylesheet" href="./app3.css" />
   </head>
   <body>
     <div class="header">
       <input type="search" id="searchInput" placeholder="Axtar" />
       <button class="addNewBtn" id="addNewBtn">yenisini yarat</button>
     </div>
+    <hr style="margin: 20px" />
 
-    <form id="addNewCountryForm">
-      <input id="countryName" type="text" placeholder="Olkenin adi" />
-      <input id="countryCapital" type="text" placeholder="Olkenin paytaxti" />
-      <input type="text" id="countryPopulation" placeholder="Olkenin ehalisi" />
+    <form id="addNewWriterForm">
+      <input id="writerName" type="text" placeholder="Yazicinin adi" />
+      <input id="writerFamily" type="text" placeholder="Yazicinin familiyasi" />
+      <input type="text" id="writerWork" placeholder="Yazicinin eseri" />
       <input type="submit" value="Elave et" id="submitBtn" />
       <input type="button" value="Legv et" id="cancelBtn" />
     </form>
+    <div class="writers" id="WritersContainer"></div>
 
-    <hr style="margin-top: 20px" />
-
-    <div class="countries" id="countriesContainer"></div>
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./app2.js"></script>
+    <script src="./app3.js"></script>
   </body>
 </html>
