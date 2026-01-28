@@ -32,17 +32,20 @@ const getAllWriters = () => {
 const showALLWriters = (Writers) => {
   const WritersContainer = document.getElementById("WritersContainer");
   WritersContainer.innerHTML = "";
-  Writers.forEach((write) => {
-    WritersContainer.innerHTML += `  <div class="write">
-        <h2>${write.yazici_adi}-${write.familiya}</h2>
-        <p>${write.eser}</p>
-        <button>Edit</button>
-        <button>Delete</button>
+  Writers.length > 0
+    ? Writers.forEach((writer) => {
+        WritersContainer.innerHTML += `  <div class="writer">
+        <h2>${writer.yazici_adi}-${writer.familiya}</h2>
+        <p>${writer.eser}</p>
+        <button onclick = "editWriter('${writer.id}')">Edit</button>
+         <button onclick="deleteWrite('${writer.id}')">Delete</button>
       </div>`;
-  });
+      })
+    : (WritersContainer.innerHTML =
+        '<p class="dataNotFoundText">Melumat tapilmadi !</p>');
 };
 
-const deleteCountry = (id) => {
+const deleteWrite = (id) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -70,7 +73,7 @@ const deleteCountry = (id) => {
 
 const setFormVisibility = (isVisible) => {
   const addNewbtn = document.getElementById("addNewBtn");
-  const WriterName = document.getElementById("WriterName");
+  const WriterName = document.getElementById("writerName");
   const addNewWriterForm = document.getElementById("addNewWriterForm");
   if (isVisible) {
     addNewWriterForm.style.display = "flex";
@@ -90,10 +93,10 @@ const editWriter = (id) => {
 
   axios.get(endpoint + "/Writers/" + id).then((res) => {
     if (res.status === 200 && res.statusText === "OK") {
-      const WriterName = document.getElementById("WriterName");
-      const WriterFamily = document.getElementById("WriterFamily");
+      const WriterName = document.getElementById("writerName");
+      const WriterFamily = document.getElementById("writerFamily");
       const submitBtn = document.getElementById("submitBtn");
-      const WriterWork = document.getElementById("WriterWork");
+      const WriterWork = document.getElementById("writerWork");
 
       submitBtn.value = "Yenile";
       WriterName.value = res.data.yazici_adi;
@@ -114,7 +117,7 @@ searchInput.oninput = (e) => {
       p.yazici_adi.toLowerCase().includes(e.target.value.toLowerCase()) ||
       p.familiya.toLowerCase().includes(e.target.value.toLowerCase()),
   );
-  showALLcountries(filteredData);
+  showALLWriters(filteredData);
 };
 
 let mode = "create";
@@ -132,14 +135,14 @@ addNewBtn.onclick = () => {
 addNewWriterForm.onsubmit = (e) => {
   e.preventDefault();
 
-  const WriterName = document.getElementById("WriterName");
-  const WriterFamily = document.getElementById("WriterFamily");
-  const WriterWork = document.getElementById("WriterWork");
+  const WriterName = document.getElementById("writerName");
+  const WriterFamily = document.getElementById("writerFamily");
+  const WriterWork = document.getElementById("writerWork");
 
   const data = {
     yazici_adi: WriterName.value,
     familiya: WriterFamily.value,
-    eser: Number(WriterWork.value),
+    eser: WriterWork.value,
   };
 
   if (mode === "create") {
@@ -179,9 +182,9 @@ addNewWriterForm.onsubmit = (e) => {
 const cancelBtn = document.getElementById("cancelBtn");
 
 cancelBtn.onclick = () => {
-  const WriterName = document.getElementById("WriterName");
-  const WriterFamily = document.getElementById("WriterFamily");
-  const WriterWork = document.getElementById("WriterWork");
+  const WriterName = document.getElementById("writerName");
+  const WriterFamily = document.getElementById("writerFamily");
+  const WriterWork = document.getElementById("writerWork");
 
   WriterName.value = "";
   WriterFamily.value = "";
